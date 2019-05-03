@@ -57,9 +57,7 @@ const profileSchema = new mongoose.Schema({
             type:String,
             required:true
         },
-        
     }
-
     ],
     education:[
         {
@@ -95,20 +93,17 @@ const profileSchema = new mongoose.Schema({
             type:String,
             required:true
         },
-        Website:{
-            type:String,
-            required:true
-        },
         LinkedIn:{
             type:String,
             required:true
         },
-        OtherLinks:{
-            type:[String],
+        Instagram:{
+            type:String,
             required:true
         },
     }
-    ]
+    ],
+    
 
 })
 
