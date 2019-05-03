@@ -6,7 +6,8 @@ This application helps developer to share knowledge with each other and oragniza
 
 Clone the repository and follow the steps below
 
-```npm install
+```
+   npm install
    npm run server
 ```
 
