@@ -13,10 +13,10 @@ Clone the repository and follow the steps below
 
 ### Technology Stack
 
-MongoDB Atlas with AWS
-NodeJS
-ExpressJs
-Mongoose
-React
-Redux
-Postman
+*MongoDB Atlas with AWS
+*NodeJS
+*ExpressJs
+*Mongoose
+*React
+*Redux
+\*Postman
