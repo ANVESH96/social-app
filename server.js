@@ -18,9 +18,6 @@ app.use("/posts",require("./routes/api/posts"))
 app.use("/users",require("./routes/api/users"))
 
 
-
-
-
 const PORT =process.env.PORT||4000
 
 app.listen(PORT,()=>{

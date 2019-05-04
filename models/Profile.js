@@ -39,7 +39,6 @@ const profileSchema = new mongoose.Schema({
         },
         location:{
             type:String,
-            required:true
         },
         from:{
             type:Date,
@@ -47,7 +46,10 @@ const profileSchema = new mongoose.Schema({
         },
         to:{
             type:Date,
-            required:true
+        },
+        current:{
+            type:Boolean,
+            default:false
         },
         role:{
             type:String,
@@ -55,7 +57,6 @@ const profileSchema = new mongoose.Schema({
         },
         description:{
             type:String,
-            required:true
         },
     }
     ],
@@ -67,15 +68,18 @@ const profileSchema = new mongoose.Schema({
         },
         location:{
             type:String,
-            required:true
+            
         },
         from:{
             type:Date,
             required:true
         },
+        current:{
+            type:Boolean,
+            default:true
+        },
         to:{
             type:Date,
-            required:true
         },
         degree:{
             type:String,

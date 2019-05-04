@@ -5,7 +5,7 @@ const db= config.get('mongoAtlas')
 
 const connect =async()=>{   
   try{
-      await mongoose.connect(db,{useNewUrlParser:true,useCreateIndex:true})
+      await mongoose.connect(db,{useNewUrlParser:true,useCreateIndex:true,useFindAndModify:false})
       console.log('db connected')
   }
    catch(err){
