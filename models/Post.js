@@ -2,12 +2,12 @@ const mongoose =require('mongoose')
 
 const postSchema =mongoose.Schema({
     name:{
-        type:Schema.Types.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         ref:'User'
     },
     text:{
         type:String,
-        required:true,
+        required:true
     },
     name:{
         type:String,
@@ -20,15 +20,17 @@ const postSchema =mongoose.Schema({
         default:Date.now()
     },
     likes:[
-        {users:{
-            type:Schema.Types.ObjectId,
+        {
+            user: {
+            type:mongoose.Schema.Types.ObjectId,
             ref:'User'
-        }}
+        }
+    }
     ],
     comments:[
         {
-            users:{
-                type:Schema.Types.ObjectId,
+            user:{
+                type:mongoose.Schema.Types.ObjectId,
                 ref:'User'
             },
         

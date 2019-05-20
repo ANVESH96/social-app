@@ -14,7 +14,7 @@ app.get("/",(req,res)=>res.send("EXPRESS IS RUNNING"))
 //Api Routes
 app.use("/auth",require("./routes/api/auth"))
 app.use("/profile",require("./routes/api/profile"))
-app.use("/posts",require("./routes/api/posts"))
+app.use("/post",require("./routes/api/posts"))
 app.use("/users",require("./routes/api/users"))
 
 
