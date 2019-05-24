@@ -1,11 +1,46 @@
-import React from "react"
+import React,{Fragment,useState} from "react"
+import {Link} from "react-router-dom"
 
 const Login=()=>{
+    const [formData,setFormData]= useState({
+    email:'',
+    password:'',
+  })
+  const {email,password} = formData
+  const changeHandler = e=> setFormData({...formData,[e.target.name]:e.target.value})
+  const submitHandler =async e => {
+    e.preventDefault()
+    console.log({email,password})
+  }
     return(
-    <div>
-        {"Login"}
-        </div>
-    )
+        <Fragment>
+        <h3 className="large text-primary">Sign In</h3>
+
+        <form className="form" onSubmit={e=>submitHandler(e)}>
+         
+          <div className="form-group">
+            <input type="email" placeholder="Email Address" name="email" value={email} onChange={e=>changeHandler(e)}/>
+            <small className="form-text"
+              >This site uses Gravatar so if you want a profile image, use a
+              Gravatar email</small
+            >
+          </div>
+          <div className="form-group">
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              minLength="6"
+              value={password}
+              onChange={e=>changeHandler(e)}
+            />
+          </div>
+          <input type="submit" className="btn btn-primary" value="Login" />
+        </form>
+        <p className="my-1">
+          Don't an account? <Link to="/Register">Sign Up</Link>
+        </p>
+        </Fragment>)
 }
 
 export default Login

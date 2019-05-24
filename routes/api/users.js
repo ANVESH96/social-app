@@ -12,6 +12,7 @@ check('email',"Email should be valid").isEmail(),
 check('password',"Password should be atleast 6 characters").isLength({min:6})
 ],async (req,res)=>{
     //check for input validations
+    console.log(req.name)
     const valid =validationResult(req)
     if(!valid.isEmpty()){
         return res.status(400).json({errors:valid.array()})

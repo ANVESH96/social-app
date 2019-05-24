@@ -49,21 +49,25 @@ img {
   font-size: 4rem;
   line-height: 1.2;
   margin-bottom: 1rem;
+  font-family: "lato";
 }
 
 .large {
-  font-size: 3rem;
+  font-size: 2rem;
   line-height: 1.2;
   margin-bottom: 1rem;
+  font-family: "lato";
 }
 
 .lead {
   font-size: 1.5rem;
   margin-bottom: 1rem;
+  font-family: "lato";
 }
 
 .text-center {
   text-align: center;
+  font-family: "lato";
 }
 
 .text-primary {
@@ -237,6 +241,7 @@ img {
 /* Forms */
 .form .form-group {
   margin: 1.2rem 0;
+  width: 50%;
 }
 
 .form .form-text {
