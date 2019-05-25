@@ -10,11 +10,16 @@ import store from "./store"
 import AlertMessage from "./components/layout/alert"
 import {loadUser} from "./actions/auth"
 import setAuthToken from './util/setAuthtToken';
+import Dashboard from "./components/dashboard/Dashboard"
+import PrivateRoute from "../src/components/Routing/PrivateRoute"
 
 if(localStorage.token){
   setAuthToken(localStorage.token)
 }
 function App() {
+  useEffect(()=>{
+    store.dispatch(loadUser())
+  },[])
   return (
     <Provider store={store}>
       <Router>
@@ -23,8 +28,9 @@ function App() {
       <section className="container">
       <AlertMessage/>
       <Switch>
-      <Route exact path ="/Login" component={Login}/>
-      <Route exact path ="/Register" component={Register}/>
+      <Route exact path ="/login" component={Login}/>
+      <Route exact path ="/register" component={Register}/>
+      <PrivateRoute exact path ="/dashboard" component={Dashboard}/>
       </Switch>
       </section>
       </Router>

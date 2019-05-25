@@ -1,11 +1,11 @@
 import React,{Fragment,useState} from "react"
-import {Link} from "react-router-dom"
+import {Link,Redirect} from "react-router-dom"
 import {connect} from "react-redux"
 import {setAlert} from "../../actions/alert"
 import {registerUser} from "../../actions/auth"
 import PropTypes from "prop-types"
 
-const Register=({setAlert,registerUser})=>{
+const Register=({setAlert,registerUser,isAuthenticated})=>{
   const [formData,setFormData]=useState({
     name:'',
     email:'',
@@ -25,6 +25,9 @@ const Register=({setAlert,registerUser})=>{
      registerUser({name,email,password})
    }
   }
+  if(isAuthenticated){
+    return <Redirect to="/dashboard" />
+   }
     return(
       <Fragment>
        <h1 className="large text-primary">Sign Up</h1>
@@ -63,7 +66,7 @@ const Register=({setAlert,registerUser})=>{
         <input type="submit" className="btn btn-primary" value="Register" />
       </form>
       <p className="my-1">
-        Already have an account? <Link to="/Login">Sign In</Link>
+        Already have an account? <Link to="/=login">Sign In</Link>
       </p>
       </Fragment>
     )
@@ -72,5 +75,7 @@ const Register=({setAlert,registerUser})=>{
 Register.propTypes = {
   setAlert :PropTypes.func.isRequired,
 }
-
-export default connect(null,{setAlert,registerUser})(Register)
+const  mapStateToProps =(state)=>({
+  isAuthenticated : state.auth.isAuthenticated
+ })
+export default connect(mapStateToProps,{setAlert,registerUser})(Register)

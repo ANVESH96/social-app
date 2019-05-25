@@ -1,7 +1,10 @@
 import React,{Fragment,useState} from "react"
-import {Link} from "react-router-dom"
+import {Link,Redirect} from "react-router-dom"
+import {connect} from "react-redux"
+import PropTypes from "prop-types"
+import {loginUser} from "../../actions/auth"
 
-const Login=()=>{
+const Login=({loginUser,isAuthenticated})=>{
     const [formData,setFormData]= useState({
     email:'',
     password:'',
@@ -10,20 +13,22 @@ const Login=()=>{
   const changeHandler = e=> setFormData({...formData,[e.target.name]:e.target.value})
   const submitHandler =async e => {
     e.preventDefault()
-    console.log({email,password})
+    loginUser({email,password})
+  }
+  //Redirect if logged in
+  if(isAuthenticated){
+   return <Redirect to="/dashboard" />
   }
     return(
         <Fragment>
         <h3 className="large text-primary">Sign In</h3>
-
         <form className="form" onSubmit={e=>submitHandler(e)}>
          
           <div className="form-group">
             <input type="email" placeholder="Email Address" name="email" value={email} onChange={e=>changeHandler(e)}/>
             <small className="form-text"
               >This site uses Gravatar so if you want a profile image, use a
-              Gravatar email</small
-            >
+              Gravatar email </small>
           </div>
           <div className="form-group">
             <input
@@ -38,9 +43,16 @@ const Login=()=>{
           <input type="submit" className="btn btn-primary" value="Login" />
         </form>
         <p className="my-1">
-          Don't an account? <Link to="/Register">Sign Up</Link>
+          Don't an account? <Link to="/register">Sign Up</Link>
         </p>
         </Fragment>)
 }
 
-export default Login
+Login.propTypes={
+  loginUser: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired
+}
+const  mapStateToProps =(state)=>({
+ isAuthenticated : state.auth.isAuthenticated
+})
+export default connect(mapStateToProps,{loginUser})(Login)
