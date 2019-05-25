@@ -76,6 +76,6 @@ export const loginUser=({email,password}) => async dispatch =>{
   //logout User
   export const logoutUser =() =>async dispatch =>{
       dispatch({
-          type:LOGOUT
+          type:LOGOUT,
       })
   }
