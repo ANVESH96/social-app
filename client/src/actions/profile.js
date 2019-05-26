@@ -5,7 +5,6 @@ import {PROFILE_ERROR,GET_PROFILE} from "./types"
 export const getProfile=()=>async dispatch =>{
     try{
         const res= await axios.get("/profile/me")
-        console.log(res.data)
         dispatch({
             type:GET_PROFILE,
             payload:res.data

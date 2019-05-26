@@ -10,9 +10,12 @@ const Navbar=({isAuthenticated,logoutUser})=>{
     </h1>
     { isAuthenticated ? 
       <ul>
-      <li><Link to="/dashboard">Dashboard</Link></li>
+      <li><Link to="/dashboard">
+      <i className="fas fa-user"/>
+      <span>Dashboard</span>
+      </Link></li>
       <li><Link to="/profile">Profile</Link></li>
-      <li><a onClick={logoutUser} href="/#!">
+      <li><a onClick={logoutUser} href="/">
       <i className="fas fa-sign-out-alt"/>
       <span className="hide-sm">Logout</span></a>
       </li>

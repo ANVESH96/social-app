@@ -15,6 +15,7 @@ const Login=({loginUser,isAuthenticated})=>{
     e.preventDefault()
     loginUser({email,password})
   }
+
   //Redirect if logged in
   if(isAuthenticated){
    return <Redirect to="/dashboard" />
