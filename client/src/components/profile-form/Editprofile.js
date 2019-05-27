@@ -1,8 +1,9 @@
-import React,{Fragment,useState} from "react"
-import {createProfile} from "../../actions/profile"
+import React,{Fragment,useState,useEffect} from "react"
+import {createProfile,getProfile} from "../../actions/profile"
 import {connect} from "react-redux"
 import {Link,withRouter} from "react-router-dom"
-const Createprofile =({createProfile,history}) =>{
+
+const Editprofile =({profile:{profile,isloading},createProfile,history}) =>{
     const[formData,setFormData] =useState({
         status:'',
         company:'',
@@ -16,6 +17,7 @@ const Createprofile =({createProfile,history}) =>{
         Instagram:'',
         github:''
     })
+
     const {
       status,
       company,
@@ -30,12 +32,28 @@ const Createprofile =({createProfile,history}) =>{
       github
     }= formData
     const[displaySocial,toggleSocial] =useState(false)
+    useEffect(()=>{
+        getProfile();
+        setFormData({
+            company: isloading || !profile.company? '' : profile.company,
+            status: isloading || !profile.status? '' : profile.status,
+            location: isloading || !profile.location? '' : profile.location,
+            website: isloading || !profile.website? '' : profile.website,
+            skills: isloading || !profile.skills? '' : profile.skills,
+            bio: isloading || !profile.bio? '' : profile.bio,
+            githubusername: isloading || !profile.githubusername? '' : profile.githubusername,
+            Twitter: isloading || !profile.social? '' : profile.Twitter,
+            LinkedIn: isloading || !profile.social? '' : profile.LinkedIn,
+            github: isloading || !profile.social? '' : profile.github,
+            Instagram: isloading || !profile.social? '' : profile.Instagram,
+        })
+    },[isloading])
     const handleChange =(e)=>{
       setFormData({...formData,[e.target.name]:e.target.value})
     }
     const handleSubmit =(e)=>{
       e.preventDefault()
-      createProfile({formData,history})
+      createProfile(formData,history,true)
     }
     return(
         <Fragment>
@@ -132,6 +150,8 @@ const Createprofile =({createProfile,history}) =>{
             </Fragment>
     )
 }
+const mapStateToProps =state=>({
+    profile : state.profile
+})
 
-
-export default connect(null,{createProfile})(withRouter(Createprofile))
+export default connect(mapStateToProps,{createProfile,getProfile})(withRouter(Editprofile))

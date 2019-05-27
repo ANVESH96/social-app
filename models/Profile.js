@@ -101,9 +101,11 @@ const profileSchema = new mongoose.Schema({
             type:String,
             required:true
         },
+        Twitter:{
+            type:String,
+        },
         Instagram:{
             type:String,
-            required:true
         },
     }
     ],
