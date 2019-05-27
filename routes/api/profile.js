@@ -31,7 +31,7 @@ check('skills',"Skills are required").not().isEmpty()
     }
 
     //Get profile objects
-    const{ company,location,website,status,bio,githubusername,skills,LinkedIn,github,Instagram} =req.body
+    const{ company,location,website,status,bio,Twitter,githubusername,skills,LinkedIn,github,Instagram} =req.body
     const profileParams ={
     } 
     
@@ -43,16 +43,17 @@ check('skills',"Skills are required").not().isEmpty()
     if(status) profileParams.status =status
     if(bio) profileParams.bio =bio
     if(githubusername) profileParams.githubusername =githubusername
-    if(skills) {profileParams.skills =skills.split(",").map(skill=>
+    if(skills.lenght>1) {profileParams.skills =skills.split(",").map(skill=>
         skill.trim()
     )}
+    else {profileParams.skills = skills}
 
     //Build Social objects for profile
     profileParams.social={}
     if(github) profileParams.social.github = github
     if(LinkedIn) profileParams.social.LinkedIn=LinkedIn
     if(Instagram) profileParams.social.Instagram =Instagram
-
+    if(Twitter) profileParams.social.Twitter =Twitter
     //Create and Update a profile
 try{
     let profile = await Profile.findOne({user:req.user.id})

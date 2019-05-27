@@ -35,6 +35,7 @@ const Createprofile =({createProfile,history}) =>{
     }
     const handleSubmit =(e)=>{
       e.preventDefault()
+      console.log("submitted")
       createProfile({formData,history})
     }
     return(

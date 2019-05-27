@@ -3,7 +3,7 @@ import {createProfile,getProfile} from "../../actions/profile"
 import {connect} from "react-redux"
 import {Link,withRouter} from "react-router-dom"
 
-const Editprofile =({profile:{profile,isloading},createProfile,history}) =>{
+const Editprofile =({profile:{profile,isloading},createProfile,history,getProfile}) =>{
     const[formData,setFormData] =useState({
         status:'',
         company:'',
@@ -32,8 +32,9 @@ const Editprofile =({profile:{profile,isloading},createProfile,history}) =>{
       github
     }= formData
     const[displaySocial,toggleSocial] =useState(false)
+    console.log("editprofile",profile)
     useEffect(()=>{
-        getProfile();
+      getProfile()
         setFormData({
             company: isloading || !profile.company? '' : profile.company,
             status: isloading || !profile.status? '' : profile.status,
@@ -42,10 +43,10 @@ const Editprofile =({profile:{profile,isloading},createProfile,history}) =>{
             skills: isloading || !profile.skills? '' : profile.skills,
             bio: isloading || !profile.bio? '' : profile.bio,
             githubusername: isloading || !profile.githubusername? '' : profile.githubusername,
-            Twitter: isloading || !profile.social? '' : profile.Twitter,
-            LinkedIn: isloading || !profile.social? '' : profile.LinkedIn,
-            github: isloading || !profile.social? '' : profile.github,
-            Instagram: isloading || !profile.social? '' : profile.Instagram,
+            Twitter: isloading || !profile.social.Twitter? '' : profile.social.Twitter,
+            LinkedIn: isloading || !profile.social.LinkedIn? '' : profile.social.LinkedIn,
+            github: isloading || !profile.social.github? '' : profile.social.github,
+            Instagram: isloading || !profile.social.Instagram? '' : profile.social.Instagram,
         })
     },[isloading])
     const handleChange =(e)=>{
@@ -53,6 +54,7 @@ const Editprofile =({profile:{profile,isloading},createProfile,history}) =>{
     }
     const handleSubmit =(e)=>{
       e.preventDefault()
+      console.log("submit",formData)
       createProfile(formData,history,true)
     }
     return(

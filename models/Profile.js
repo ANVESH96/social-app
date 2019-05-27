@@ -91,8 +91,8 @@ const profileSchema = new mongoose.Schema({
         },
     }
     ],
-   social:[
-        {
+   social:{
+        
         github:{
             type:String,
             required:true
@@ -107,8 +107,8 @@ const profileSchema = new mongoose.Schema({
         Instagram:{
             type:String,
         },
-    }
-    ],
+    
+},
     
 
 })
