@@ -3,6 +3,7 @@ const profilerouter =express.Router()
 const Profile = require("../../models/Profile")
 const User =require("../../models/User")
 const auth = require("../../middleware/auth")
+const Post = require("../../models/Post")
 const {check,validationResult} =require("express-validator/check")
 //GET current user profile
 profilerouter.get('/me',auth,async(req,res)=>{
@@ -108,6 +109,11 @@ profilerouter.get('/user/:user_id',async(req,res)=>{
 
 profilerouter.delete('/',auth,async(req,res)=>{
     try{
+        //remove Posts 
+        await Post.deleteMany({user:req.user.id})
+        .catch((err)=>{
+            console.log(err)
+        })
         //remove profile
         await Profile.findOneAndRemove({user:req.user.id})
         .catch((err)=>{
