@@ -33,12 +33,17 @@ const profileSchema = new mongoose.Schema({
     },
     experience:[
         {
+        title:{
+            type:String,
+            required:true
+            },   
         companyname:{
             type:String,
             required:true
         },
         location:{
             type:String,
+            required:true
         },
         from:{
             type:Date,
@@ -50,10 +55,6 @@ const profileSchema = new mongoose.Schema({
         current:{
             type:Boolean,
             default:false
-        },
-        role:{
-            type:String,
-            required:true
         },
         description:{
             type:String,
@@ -76,7 +77,7 @@ const profileSchema = new mongoose.Schema({
         },
         current:{
             type:Boolean,
-            default:true
+            default:false
         },
         to:{
             type:Date,

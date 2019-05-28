@@ -129,32 +129,32 @@ profilerouter.delete('/',auth,async(req,res)=>{
 
 //Update profile experience and education
 //authentication needed -- accesed privately
-profilerouter.put('/experience',[auth,[check('role','role is required').not().isEmpty(),
+profilerouter.put('/experience',[auth,[check('title','title is required').not().isEmpty(),
 check('companyname','Company is required').not().isEmpty(),
 check('from','From Date is required').not().isEmpty()
 ]],async(req,res)=>{
     const validatejson =validationResult(req)
     if(!validatejson.isEmpty()){
-       return res.status(400).json({message:validatejson.error()})
+        return res.status(400).json({errors:validatejson.array()})
     }
   const{
       title,
       companyname,
-      role,
       from,
       to,
       description,
-      location
+      location,
+      current
   } =req.body
 
   const Experience={
     title,
     companyname,
-    role,
     from,
     to,
     description,
-    location
+    location,
+    current
   }
   try{
 const profile  =await Profile.findOne({user:req.user.id})
@@ -192,7 +192,7 @@ check('from','form date is required').not().isEmpty(),
 ]],async(req,res)=>{
     const validatejson =validationResult(req)
     if(!validatejson.isEmpty()){
-       return res.status(400).json({message:validatejson.error()})
+        return res.status(400).json({errors:validatejson.array()})
     }
   const{
      schoolname,
