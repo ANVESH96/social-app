@@ -1,5 +1,7 @@
 const express =require('express')
 const profilerouter =express.Router()
+const request = require("request")
+const config = require('config')
 const Profile = require("../../models/Profile")
 const User =require("../../models/User")
 const auth = require("../../middleware/auth")
@@ -242,6 +244,31 @@ profilerouter.delete('/education/:edu_id',auth,async(req,res)=>{
     catch(err){
      res.status(500).json({message:err})
     }
+})
+
+
+
+//GET GITHUB REPOS
+//Public accessible
+profilerouter.get('/github/:username',(req,res)=>{
+try{
+   const options={
+       uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${config.get('githubClinetId')}&clinet_secretid=${config.get('githubSecretId')}`,
+       method: 'GET',
+       headers:{'user-agent':'node.js'}
+    }
+    request(options,(error,response,body)=>{
+        if(error) throw err
+    if(response.statusCode !== 200){
+        res.status(404).json({msg:'Profile not found'})
+    }
+     res.json(JSON.parse(body))
+    })
+}
+catch(err){
+    console.log(err.message)
+    res.status(500).send('Server Error')
+}
 })
 
 module.exports = profilerouter

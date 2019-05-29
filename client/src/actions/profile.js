@@ -1,6 +1,6 @@
 import axios from "axios"
 import {setAlert} from "./alert"
-import {PROFILE_ERROR,GET_PROFILE,GET_PROFILES,UPDATE_PROFILE,CLEAR_PROFILE, DELETE_ACCOUNT} from "./types"
+import {PROFILE_ERROR,GET_PROFILE,GET_PROFILES,UPDATE_PROFILE,CLEAR_PROFILE, DELETE_ACCOUNT,GET_REPOS} from "./types"
 
 //GET profile of a user
 export const getProfile=()=>async dispatch =>{
@@ -53,9 +53,33 @@ export const getProfile=()=>async dispatch =>{
 
 }
 
+//GET profile by ID
+export const getProfilebyId=(userid)=>async dispatch =>{
+
+   try{
+       const res= await axios.get(`/profile/${userid}`)
+       dispatch({
+           type:GET_PROFILES,
+           payload:res.data
+       })
+   }
+
+   catch(err){
+       const errors =err.response.data.errors
+       if(errors){
+           errors.forEach(error=>dispatch(setAlert(error.msg,'danger')))
+       }
+       dispatch({
+           type:PROFILE_ERROR,
+           payload: {msg:err.response.statusText,status:err.response.status}
+       })
+
+   }
+
+}
 
 //Create or Update profile
-export const createProfile =(formData,history,edit=false)=>async dispatch =>{
+export const createProfile =({formData,history,edit=false})=>async dispatch =>{
     console.log("action",formData)
     try{
     const config={
@@ -69,7 +93,7 @@ export const createProfile =(formData,history,edit=false)=>async dispatch =>{
         type:GET_PROFILE,
         payload:res.data
     })
-
+    
     dispatch(setAlert(edit? 'Profile Updated':'Profile Created','success'))
     console.log(edit)
     if(!edit){
@@ -77,7 +101,7 @@ export const createProfile =(formData,history,edit=false)=>async dispatch =>{
     }
     }
  catch(err){
-     const errors =err.response
+     const errors =err.response.data.errors
      if(errors){
          errors.forEach(error=>dispatch(setAlert(error.msg,'danger')))
      }
@@ -195,7 +219,7 @@ export const deleteEducation = (id) => async dispatch =>{
 export const deleteAccount = () => async dispatch =>{
     if(window.confirm("Delete operation would remove all your data & It cannot be undone!!"))
     try{
-        const res = await axios.delete(`/profile`)
+         await axios.delete(`/profile`)
         dispatch(
             {
                 type:CLEAR_PROFILE,
@@ -205,6 +229,27 @@ export const deleteAccount = () => async dispatch =>{
             type:DELETE_ACCOUNT
         })
         dispatch(setAlert("Your Account Deleted permanently"))
+    }
+    catch(err){
+        dispatch({
+            type:PROFILE_ERROR,
+            payload: {msg:err.response.statusText,status:err.response.status}
+        })
+    }
+
+}
+
+//GET github repos
+export const getGithubrepos = (username) => async dispatch =>{
+    try{
+        const res = await axios.delete(`/profile/github/${username}`)
+        dispatch(
+            {
+                type:GET_REPOS,
+                payload:res.data
+            }
+        )
+
     }
     catch(err){
         dispatch({

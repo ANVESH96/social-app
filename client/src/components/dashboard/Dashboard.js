@@ -9,11 +9,11 @@ import Education from "./Education"
 const Dashboard =({auth:{user},profile:{profile,isloading},getProfile,deleteAccount}) =>{
     useEffect(()=>{
         getProfile();
-    },[isloading])
+    },[getProfile])
     return( isloading && profile ===null ? <Spinner/> :<Fragment>
         <h1 className="large text-primary"> Dashboard</h1> 
         <p className="lead">
-        <i class="far fa-smile"></i> Welcome {user && user.name}</p>
+        <i className="far fa-smile"></i> Welcome {user && user.name}</p>
         { profile !==null ? <Fragment> 
             <Dashboardactions/>
             <Experience experiences={profile.experience}/>

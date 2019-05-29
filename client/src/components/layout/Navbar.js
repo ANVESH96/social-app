@@ -14,7 +14,7 @@ const Navbar=({isAuthenticated,logoutUser})=>{
       <i className="fas fa-user"/>
       <span>Dashboard</span>
       </Link></li>
-      <li><Link to="/profile">Profile</Link></li>
+      <li><Link to="/profiles">Developers</Link></li>
       <li><a onClick={logoutUser} href="/">
       <i className="fas fa-sign-out-alt"/>
       <span className="hide-sm">Logout</span></a>
@@ -22,7 +22,7 @@ const Navbar=({isAuthenticated,logoutUser})=>{
       </ul> 
       : 
      <ul>
-     <li><Link to="/!">Developers</Link></li>
+     <li><Link to="/profiles">Developers</Link></li>
      <li><Link to="/register">Register</Link></li>
      <li><Link to="/login">Login</Link></li>
      </ul>

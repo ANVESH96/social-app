@@ -48,7 +48,7 @@ const Editprofile =({profile:{profile,isloading},createProfile,history,getProfil
             github: isloading || !profile.social.github? '' : profile.social.github,
             Instagram: isloading || !profile.social.Instagram? '' : profile.social.Instagram,
         })
-    },[isloading])
+    },[getProfile,isloading])
     const handleChange =(e)=>{
       setFormData({...formData,[e.target.name]:e.target.value})
     }
