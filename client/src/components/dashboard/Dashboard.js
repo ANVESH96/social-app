@@ -16,6 +16,7 @@ const Dashboard =({auth:{user},profile:{profile,isloading},getProfile,deleteAcco
         <i className="far fa-smile"></i> Welcome {user && user.name}</p>
         { profile !==null ? <Fragment> 
             <Dashboardactions/>
+
             <Experience experiences={profile.experience}/>
             <Education education={profile.education}/>
             <div className="my-2">

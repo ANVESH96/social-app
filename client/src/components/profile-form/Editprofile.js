@@ -35,27 +35,29 @@ const Editprofile =({profile:{profile,isloading},createProfile,history,getProfil
     console.log("editprofile",profile)
     useEffect(()=>{
       getProfile()
-        setFormData({
-            company: isloading || !profile.company? '' : profile.company,
-            status: isloading || !profile.status? '' : profile.status,
-            location: isloading || !profile.location? '' : profile.location,
-            website: isloading || !profile.website? '' : profile.website,
-            skills: isloading || !profile.skills? '' : profile.skills,
-            bio: isloading || !profile.bio? '' : profile.bio,
-            githubusername: isloading || !profile.githubusername? '' : profile.githubusername,
-            Twitter: isloading || !profile.social.Twitter? '' : profile.social.Twitter,
-            LinkedIn: isloading || !profile.social.LinkedIn? '' : profile.social.LinkedIn,
-            github: isloading || !profile.social.github? '' : profile.social.github,
-            Instagram: isloading || !profile.social.Instagram? '' : profile.social.Instagram,
-        })
-    },[getProfile,isloading])
+      setFormData({
+          company: isloading || !profile.company? '' : profile.company,
+          status: isloading || !profile.status? '' : profile.status,
+          location: isloading || !profile.location? '' : profile.location,
+          website: isloading || !profile.website? '' : profile.website,
+          skills: isloading || !profile.skills? '' : profile.skills,
+          bio: isloading || !profile.bio? '' : profile.bio,
+          githubusername: isloading || !profile.githubusername? '' : profile.githubusername,
+          Twitter: isloading || !profile.social.Twitter? '' : profile.social.Twitter,
+          LinkedIn: isloading || !profile.social.LinkedIn? '' : profile.social.LinkedIn,
+          github: isloading || !profile.social.github? '' : profile.social.github,
+          Instagram: isloading || !profile.social.Instagram? '' : profile.social.Instagram,
+      })
+    },[getProfile, isloading])
+      
+  
     const handleChange =(e)=>{
       setFormData({...formData,[e.target.name]:e.target.value})
     }
     const handleSubmit =(e)=>{
       e.preventDefault()
       console.log("submit",formData)
-      createProfile(formData,history,true)
+      createProfile({formData,history})
     }
     return(
         <Fragment>

@@ -34,9 +34,10 @@ const Createprofile =({createProfile,history}) =>{
       setFormData({...formData,[e.target.name]:e.target.value})
     }
     const handleSubmit =(e)=>{
+      const editvalue = true
       e.preventDefault()
       console.log("submitted")
-      createProfile({formData,history})
+      createProfile({formData,history,editvalue})
     }
     return(
         <Fragment>
